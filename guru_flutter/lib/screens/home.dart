@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:html';
 
+import 'package:guru_flutter/screens/CRUD/add_postingan.dart';
+import 'package:guru_flutter/screens/CRUD/edit_postingan.dart';
 import 'package:guru_flutter/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -15,6 +18,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  final String url = 'http://127.0.0.1:8000/api/postingan';
+
+  Future getPostingan() async{
+    var response = await http.get(Uri.parse(url));
+    return json.decode(response.body);
+  }
+
+  Future deletepostingan(String postinganId) async{
+  String url = 'http://127.0.0.1:8000/api/postingan/' + postinganId;
+
+    var response = await http.delete(Uri.parse(url));
+    return json.decode(response.body);
+  }
+
   late SharedPreferences preferences;
   bool isLoading = false;
   @override
@@ -63,8 +81,18 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: isLoading
+       floatingActionButton: FloatingActionButton(
+        onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: ((context) => addpostingan())));  
+        },
+        child: Icon(Icons.add
+        ),
+      ),
+      body: Container(
+       child: Column(
+        children: [
+          Container(
+             child: isLoading
             ? const Center(
                 child: CircularProgressIndicator(),
               )
@@ -87,6 +115,74 @@ class _HomeState extends State<Home> {
                   Text(preferences.getString('token').toString()),
                 ],
               ),
+          ),
+        Container(
+          child: FutureBuilder(
+            future: getPostingan(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: snapshot.data['data'].length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      child: Card(
+                        elevation: 5,
+                        child: Row(
+                          children: [
+                            Container(
+                              child: Image.network(snapshot.data['data'][index]['gambar'], width: 250, height: 250),
+                            ),
+                            Expanded(
+                              child: Container(
+                                child: Text(snapshot.data['data'][index]['pesan'], style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),),
+                              ),
+                            ),
+                             Container(
+                            child:Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: ((context) => editpostigan( postigan: snapshot.data['data'][index] ,))));
+                                  },
+                                  child: Container(
+                                    height: 70,
+                                    child: Icon(Icons.mode_edit_rounded, size: 50,),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    deletepostingan(snapshot.data['data'][index]['id'].toString()).then((value) {
+                                    setState(() {});
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('data berhasil di delete')));
+                                    } 
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 70,
+                                    child: Icon(Icons.delete_forever, size: 50,),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                          ],
+                        ),
+                      ),
+                    );
+                  }, // Tambahkan kurung kurawal penutup
+                );
+              } else {
+                return Text("data gagal");
+              }
+            },
+          ),
+        ),
+       ]),
       ),
     );
   }
