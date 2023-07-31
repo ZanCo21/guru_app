@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, camel_case_types, prefer_final_fields, non_constant_identifier_names
+
 import 'dart:convert';
 import 'package:guru_flutter/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,7 @@ class addpostingan extends StatelessWidget {
           children: [
             TextFormField(
               controller:_gambarController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "link gambar",
               ),
               validator:(value){
@@ -39,7 +41,7 @@ class addpostingan extends StatelessWidget {
             ),
             TextFormField(
               controller:_pesanController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "pesan"
               ),
                validator:(value){
@@ -53,11 +55,11 @@ class addpostingan extends StatelessWidget {
             onPressed: () {
               if (_formKey.currentState?.validate() == true) {
                 savepostingan().then((value) => {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => Home()))),
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('data berhasil di tambah')))
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => const Home()))),
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('data berhasil di tambah')))
                 });
               }
-            }, child: Text('save'))
+            }, child: const Text('save'))
           ],
         ),
       ),

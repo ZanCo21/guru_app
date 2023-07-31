@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, must_be_immutable, use_key_in_widget_constructors, prefer_final_fields, non_constant_identifier_names, prefer_interpolation_to_compose_strings
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:guru_flutter/screens/home.dart';
@@ -30,7 +32,7 @@ class editpostigan extends StatelessWidget {
           children: [
             TextFormField(
               controller:_gambarController..text = postigan['gambar'].toString(),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "link gambar",
               ),
               validator:(value){
@@ -42,7 +44,7 @@ class editpostigan extends StatelessWidget {
             ),
             TextFormField(
               controller:_pesanController..text = postigan['pesan'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "pesan"
               ),
                validator:(value){
@@ -61,11 +63,11 @@ class editpostigan extends StatelessWidget {
             onPressed: () {
               if (_formKey.currentState?.validate() == true) {
                 updatepostigan().then((value) => {
-                  Navigator.push(context, MaterialPageRoute(builder: ((context) => Home()))),
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('data berhasil di update')))
+                  Navigator.push(context, MaterialPageRoute(builder: ((context) => const Home()))),
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('data berhasil di update')))
                 });
               }
-            }, child: Text('update'))
+            }, child: const Text('update'))
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:guru_flutter/screens/auth/login.dart';
-import 'package:guru_flutter/screens/auth/register.dart';
 import 'package:guru_flutter/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,16 +22,16 @@ class MyApp extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
-              return Text('Some error has Occurred');
+              return const Text('Some error has Occurred');
             } else if (snapshot.hasData) {
               final token = snapshot.data!.getString('token');
               if (token != null) {
-                return Home();
+                return const Home();
               } else {
-                return Login();
+                return const Login();
               }
             } else {
-              return Login();
+              return const Login();
             }
           }),
     );

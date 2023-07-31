@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.guru_flutter">
+    package="com.example.talkhub">
    <application
-        android:label="guru_flutter"
+        android:label="talkhub"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

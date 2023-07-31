@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "guru_flutter" "\0"
+            VALUE "FileDescription", "talkhub" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "guru_flutter" "\0"
+            VALUE "InternalName", "talkhub" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "guru_flutter.exe" "\0"
-            VALUE "ProductName", "guru_flutter" "\0"
+            VALUE "OriginalFilename", "talkhub.exe" "\0"
+            VALUE "ProductName", "talkhub" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

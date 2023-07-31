@@ -1,6 +1,6 @@
 {
-    "name": "guru_flutter",
-    "short_name": "guru_flutter",
+    "name": "talkhub",
+    "short_name": "talkhub",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

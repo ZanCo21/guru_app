@@ -1,4 +1,4 @@
-# guru_flutter
+# talkhub
 
 A new Flutter project.
 
